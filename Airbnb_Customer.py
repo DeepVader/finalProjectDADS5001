@@ -9,12 +9,8 @@ from geopy.distance import geodesic
 st.set_page_config(page_title="Airbnb For Travelers", layout="wide")
 st.title("AIRBNB FOR TRAVELERS")
 
-##LOCAL_FILE = r'C:\Users\fah_b\Desktop\final-5001\080668one_hot_amenities_1.csv'
 
 # Load landmarks
-# landmarks = pd.read_csv("bangkok_attractions_cleaned.csv")
-
-
 @st.cache_data
 def load_landmarks():
     with duckdb.connect("db/airbnb.db") as con:
@@ -27,7 +23,6 @@ landmarks = load_landmarks()
 
 @st.cache_data
 def load_data():
-    # data = pd.read_csv("080668one_hot_amenities.csv")
     with duckdb.connect("db/airbnb.db") as con:
         data = con.query("SELECT * FROM airbnb").df()
     data = data.dropna(
