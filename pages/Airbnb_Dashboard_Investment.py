@@ -10,10 +10,10 @@ from pymongo import MongoClient
 import duckdb
 
 
-DB_NAME = "airbnb_db"
-COLLECTION_NAME = "listings"
-
-URI = "mongodb+srv://Pha22:Pha22@cluster0.okkqifc.mongodb.net/"
+# MongoDB
+DB_NAME = st.secrets["mongo"]["DB_NAME"]
+COLLECTION_NAME = st.secrets["mongo"]["COLLECTION_NAME"]
+URI = st.secrets["mongo"]["URI"]
 client = MongoClient(URI)
 collection = client[DB_NAME][COLLECTION_NAME]
 
