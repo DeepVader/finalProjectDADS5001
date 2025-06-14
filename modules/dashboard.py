@@ -1,4 +1,5 @@
 def show(df_clean, area_df):
+    import pandas as pd
     import streamlit as st
     import plotly.express as px
     import plotly.graph_objects as go
@@ -212,7 +213,48 @@ def show(df_clean, area_df):
         & (df_clean["property_grouped"] == selected_wc_prop_group)
     ]
     try:
-        amenity_cols = df_wc.columns[32:66]
+        amenity_cols = [
+            "Air conditioning",
+            "Bed linens",
+            "Breakfast",
+            "Coffee maker",
+            "Dedicated workspace",
+            "Dishes and silverware",
+            "Dryer",
+            "Elevator",
+            "Essentials",
+            "Extra pillows and blankets",
+            "Fire extinguisher",
+            "First aid kit",
+            "Free parking",
+            "Garden or backyard",
+            "Gym",
+            "Hair dryer",
+            "Hangers",
+            "Heating",
+            "Host greets you",
+            "Hot water",
+            "Iron",
+            "Kitchen",
+            "Lock on bedroom door",
+            "Lockbox",
+            "Luggage dropoff allowed",
+            "Microwave",
+            "Patio or balcony",
+            "Pool",
+            "Refrigerator",
+            "Room-darkening shades",
+            "Shampoo",
+            "Shower gel",
+            "Smoke alarm",
+            "TV",
+            "Washer",
+            "Wifi",
+        ]
+        df_wc[amenity_cols] = (
+            df_wc[amenity_cols].apply(pd.to_numeric, errors="coerce").fillna(0)
+        )
+
         word_freq = {
             col.replace("_", " ").title(): df_wc[col].sum()
             for col in amenity_cols

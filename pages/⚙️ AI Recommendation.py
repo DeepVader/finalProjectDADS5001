@@ -7,7 +7,8 @@ import google.generativeai as genai
 # from dotenv import load_dotenv
 
 # load_dotenv()
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]["GOOGLE_API_KEY"]
+print(GOOGLE_API_KEY)
 genai.configure(api_key=GOOGLE_API_KEY)
 
 new_chat_id = f"{time.time()}"
@@ -73,7 +74,7 @@ except:
     st.session_state.messages = []
     st.session_state.gemini_history = []
     print("new_cache made")
-st.session_state.model = genai.GenerativeModel("gemini-pro")
+st.session_state.model = genai.GenerativeModel("gemini-2.0-flash")
 st.session_state.chat = st.session_state.model.start_chat(
     history=st.session_state.gemini_history,
 )
